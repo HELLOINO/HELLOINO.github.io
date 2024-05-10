@@ -1,5 +1,5 @@
 ---
-title: Why Jekyll with GitBook
+title: 그냥 테스트
 author: Tao He
 date: 2019-04-27
 category: Jekyll
@@ -9,8 +9,11 @@ layout: post
 EMP 테이블와 DEPT 테이블을 사용합니다.
 
 ## FROM 절 조인 형태
+
 ANSI/ISO SQL에서 표시하는 FROM 절의 조인 형태는 다음과 같다.
+
 >
+
 - INNER JOIN
 - NATURAL JOIN
 - USING 조건절
@@ -25,6 +28,7 @@ NATURAL JOIN은 INNER JOIN의 하위 개념으로 볼 수 있으며, 두 테이�
 ANSI/ISO SQL 표준 방식의 JOIN 문법에서 가장 두드러진 특징은 ON 조건절을 통해 JOIN 조건과 데이터 제한 조건을 분리해 기술하는 것이다.
 
 ## INNER JOIN
+
 내부 조인이라고 하며, 조인 조건을 만족하는 행들만 반환한다.
 
 ```sql
@@ -36,10 +40,11 @@ FROM EMP A
 INNER JOIN DEPT B
     ON B.DEPTNO = A.DEPTNO;
 ```
+
 ![](https://velog.velcdn.com/images/gid0727/post/59da7d80-068a-46b6-b852-25b7523ee6f0/image.png)
 
-
 ## NATURAL JOIN
+
 두 테이블 간에 동일한 이름을 갖는 모든 칼럼들에 대해 EQUI JOIN을 수행한다.
 NATURAL JOIN이 명시되면 추가로 USING 조건절, ON조건절, WHERE 절에서 조인 조건을 정의할 수 없다.
 
@@ -51,11 +56,13 @@ SELECT A.EMPNO
 FROM EMP A
 NATURAL INNER JOIN DEPT B
 ```
+
 ![](https://velog.velcdn.com/images/gid0727/post/59da7d80-068a-46b6-b852-25b7523ee6f0/image.png)
 
 위 SQL은 별도의 조인 칼럼을 지정하지 않았지만, 두 개의 테이블에서 DEPTNO라는 공통된 칼럼을 자동으로 인식해 처리한 것이다.
 
 ## USING 조건절
+
 NATURAL JOIN에서는 같은 이름을 가진 모든 칼럼들에 대해 조인이 이루어지지만, FROM 절의 USING 조건절을 이용하면 같은 이름을 가진 칼럼들 중에서 원하는 칼럼에 대해서만 선택적으로 EQUI JOIN을 할 수가 있다.
 
 ```sql
@@ -64,12 +71,13 @@ FROM EMP A
 JOIN DEPT B
 USING(DEPTNO);
 ```
+
 ![](https://velog.velcdn.com/images/gid0727/post/dcabe00d-10e0-4bf6-805f-f518d7f3487b/image.png)
 
-
-'*'처럼 별도의 칼럼 순서를 지정하지 않으면 USING 조건절의 기준이 되는 칼럼이 다른 칼럼보다 먼저 출력된다. 이때 USING JOIN은 조인에 사용된 같은 이름의 칼럼을 하나로 처리한다.
+'\*'처럼 별도의 칼럼 순서를 지정하지 않으면 USING 조건절의 기준이 되는 칼럼이 다른 칼럼보다 먼저 출력된다. 이때 USING JOIN은 조인에 사용된 같은 이름의 칼럼을 하나로 처리한다.
 
 ## ON 조건절
+
 조인 서술부(ON 조건절)와 비 조인 서술부(WHERE 조건절)를 분리해 이해가 쉬우며, 칼럼명이 다르더라도 조인 조건을 사용할 수 있는 장점이 있다.
 
 ON 조건절은 WHERE 절의 조인 조건과 같은 기능을 하면서도, 명시적으로 조인의 조건을 구분할 수 있다. 다만 FROM 절에 테이블이 많이 사용될 경우 다소 복잡하게 보여 가독성이 떨어지는 단점이 있다.
@@ -81,10 +89,11 @@ JOIN DEPT B
   ON B.DEPTNO = A.DEPTNO
 WHERE B.DEPTNO = 30;
 ```
+
 ![](https://velog.velcdn.com/images/gid0727/post/94cd1804-68da-4967-b0c2-36f152f3bb41/image.png)
 
-
 ## CROSS JOIN
+
 CROSS JOIN은 E.F.CODD 박사가 언급한 일반 집합 연산자의 PRODUCT의 개념으로 테이블 간 조인 조건이 없는 경우 생길 수 있는 모든 데이터의 조합을 말한다.
 
 ```sql
@@ -93,12 +102,13 @@ FROM EMP A
 CROSS JOIN DEPT B
 ORDER BY A.ENAME;
 ```
-![](https://velog.velcdn.com/images/gid0727/post/7473bf5f-b164-43c0-abfa-c4fee332f68f/image.png)
 
+![](https://velog.velcdn.com/images/gid0727/post/7473bf5f-b164-43c0-abfa-c4fee332f68f/image.png)
 
 정상적인 데이터 모델이라면 CROSS PRODUCT가 필요한 경우는 많지 않지만, 간혹 튜닝이나 리포트를 작성하기 위해 고의적으로 사용하는 경우가 있다.
 
 ## OUTER JOIN
+
 가. LEFT OUTER JOIN
 조인 수행 시 먼저 표기된 좌측 테이블에 해당하는 데이터를 읽은 후, 나중 표기된 우측 테이블에서 조인 대상 데이터를 읽어 온다.
 
@@ -108,6 +118,7 @@ FROM EMP A
 LEFT OUTER JOIN DEPT B
 ON B.DEPTNO = A.DEPTNO;
 ```
+
 ![](https://velog.velcdn.com/images/gid0727/post/e8136523-e42e-42df-9d68-f47c21644b21/image.png)
 
 나. RIGHT OUTER JOIN
@@ -119,21 +130,24 @@ FROM EMP A
 RIGHT OUTER JOIN DEPT B
 ON B.DEPTNO = A.DEPTNO;
 ```
+
 ![](https://velog.velcdn.com/images/gid0727/post/6c9267e4-7f8c-4039-8e6c-9c9cd88a4bb5/image.png)
 
 다. FULL OUTER JOIN
+
 ```sql
 SELECT A.ENAME, B.DEPTNO, B.DNAME, B.LOC
 FROM EMP A
 FULL OUTER JOIN DEPT B
 ON B.DEPTNO = A.DEPTNO;
 ```
+
 ![](https://velog.velcdn.com/images/gid0727/post/ea0bf3db-2160-443b-ace3-d5158eac1644/image.png)
 
 조인 수행 시 좌측, 우측 테이블의 모든 데이터를 읽어 조인해 결과를 생성한다.
 
-
 ## INNER vs OUTER vs CROSS JOIN 비교
+
 ![](https://velog.velcdn.com/images/gid0727/post/6169a073-ceaa-4346-ba68-53462217a246/image.png)
 
 INNER JOIN의 결과는
@@ -150,5 +164,5 @@ NULL-A, B-B, C-C, D-NULL, E-NULL인 5건이 출력.
 
 CROSS JOIN는
 조인 가능한 모든 경우의 수를 표시하지만, 단 OUTER JOIN은 제외한다.
-양쪽 데이터의 곱인 4 * 3 = 12건이 나온다.
+양쪽 데이터의 곱인 4 \* 3 = 12건이 나온다.
 B-A, B-B, B-c, C-A, C-B, C-C, D-A, D-B, D-C, E-A, E-B, E-C인 12건이 출력.
