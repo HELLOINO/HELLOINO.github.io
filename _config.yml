@@ -1,4 +1,7 @@
 # Configurations
+layout: default
+comments: true
+# other options
 title: 테스트 공간
 longtitle: 테스트 공간.
 author: HE Tao
